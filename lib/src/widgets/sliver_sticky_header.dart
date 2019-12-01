@@ -10,13 +10,14 @@ typedef Widget SliverStickyHeaderWidgetBuilder(
 /// State describing how a sticky header is rendered.
 @immutable
 class SliverStickyHeaderState {
-  const SliverStickyHeaderState(
-    this.scrollPercentage,
-    this.isPinned,
-  )   : assert(scrollPercentage != null),
+  const SliverStickyHeaderState(this.scrollPercentage,
+      this.isPinned,
+      this.precedingVisibleExtent)
+      : assert(scrollPercentage != null),
         assert(isPinned != null);
 
   final double scrollPercentage;
+  final double precedingVisibleExtent;
 
   final bool isPinned;
 
@@ -26,12 +27,13 @@ class SliverStickyHeaderState {
     if (other is! SliverStickyHeaderState) return false;
     final SliverStickyHeaderState typedOther = other;
     return scrollPercentage == typedOther.scrollPercentage &&
-        isPinned == typedOther.isPinned;
+        isPinned == typedOther.isPinned &&
+        precedingVisibleExtent == typedOther.precedingVisibleExtent;
   }
 
   @override
   int get hashCode {
-    return hashValues(scrollPercentage, isPinned);
+    return hashValues(scrollPercentage, isPinned, precedingVisibleExtent);
   }
 }
 
